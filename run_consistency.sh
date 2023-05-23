@@ -1,0 +1,1 @@
+python consistency.py --result_dir $1 --gt_path $2 --mode $3

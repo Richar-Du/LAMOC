@@ -1,0 +1,54 @@
+ # Copyright (c) 2022, salesforce.com, inc.
+ # All rights reserved.
+ # SPDX-License-Identifier: BSD-3-Clause
+ # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+
+model:
+  arch: blip_caption_policy
+  load_finetuned: True
+
+  pretrained: "https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_large.pth"
+  finetuned: "https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_large_caption.pth"
+  # finetuned: "https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/BLIP/blip_coco_caption_base.pth"
+  # finetuned: "/mnt/duyifan/lavis/output/BLIP/AOKVQA_CAPTION/20230103112/checkpoint_best.pth"
+  llm_path: "/mnt/duyifan/ckpt/google/flan-t5-xxl"
+  # llm_path: "/mnt/duyifan/ckpt/google/flan-t5-xl"
+  # llm_path: "/mnt/duyifan/ckpt/google/flan-t5-large"
+  # llm_path: "/mnt/duyifan/ckpt/google/flan-t5-base"
+  # llm_path: "/mnt/duyifan/ckpt/allenai/unifiedqa-v2-t5-base-1363200"
+  # llm_path: "/mnt/duyifan/ckpt/allenai/unifiedqa-v2-t5-11b-1363200"
+
+  vit_type: "large"
+  vit_grad_ckpt: True
+  vit_ckpt_layer: 5
+
+  image_size: 384
+
+  # bert config
+  med_config_path: "configs/models/med_large_config.json"
+  encoder: False
+
+  # generation configs
+  prompt: "a picture of "
+  feedback: "nll"
+  num_beams: 1
+  num_return_sequences: 1
+  top_k: 0
+  top_p: 1.0
+  use_nucleus_sampling: False
+  alpha: 0.9
+  factor: 1
+
+
+preprocess:
+    vis_processor:
+        train:
+          name: "blip_image_train"
+        eval:
+          name: "blip_image_eval"
+    text_processor:
+        train:
+          name: "blip_caption"
+          prompt: "a picture of "
+        eval:
+          name: "blip_caption"
