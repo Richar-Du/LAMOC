@@ -213,11 +213,15 @@ class BaseTask:
 
             with torch.cuda.amp.autocast(enabled=use_amp):
                 return_dict = self.train_step(model=model, samples=samples)
+                # for adaption training + rl training:
                 # if epoch <= 0:
                 #     loss = return_dict['loss']
                 # else:
                 #     loss = return_dict['rl_loss']
-                loss = return_dict['rl_loss']
+                # for rl training:
+                # loss = return_dict['rl_loss']
+                # for adaption training:
+                loss = return_dict['loss']
                 if 'rewards' in return_dict:
                     wandb.log({'rewards': return_dict['rewards']})
 
