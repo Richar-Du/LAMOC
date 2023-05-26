@@ -16,6 +16,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     stop_words = stopwords.words('english')
+    import spacy
+    lemmatizer = spacy.load("en_core_web_sm")
     vqa_file = open(args.gt_path, 'r')
     vqa_json = json.load(vqa_file)
     avg_acc = []
@@ -44,6 +46,16 @@ if __name__ == "__main__":
                     answer = [ele for ele in answer if ele not in stop_words]
                 try:
                     answer = ' '.join(e for e in answer)        # if e.isalnum()
+                    
+                    doc = lemmatizer(answer)
+                    words = []
+                    for token in doc:
+                        if token.pos_ in ["NOUN", "VERB"]:
+                            words.append(token.lemma_)
+                        else:
+                            words.append(token.text)
+                    answer = " ".join(words)
+                    
                     ensumble_prediction.append(answer.lower())      # 
                 except:
                     import ipdb
@@ -147,25 +159,3 @@ if __name__ == "__main__":
 # output_file.write(json.dumps(output))
 # input_file.close()
 # output_file.close()
-
-
-def _lemmatize(answers):
-    def apply(answer):
-        doc = lemmatizer(answer)
-
-        words = []
-        for token in doc:
-            if token.pos_ in ["NOUN", "VERB"]:
-                words.append(token.lemma_)
-            else:
-                words.append(token.text)
-        answer = " ".join(words)
-
-        return answer
-
-    return [apply(answer) for answer in answers]
-
-@property
-def lemmatizer():
-    import spacy
-    _lemmatizer = spacy.load("en_core_web_sm")
