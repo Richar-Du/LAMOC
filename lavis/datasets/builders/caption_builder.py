@@ -28,6 +28,7 @@ class COCOCapBuilder(BaseDatasetBuilder):
 
     DATASET_CONFIG_DICT = {
         "default": "configs/datasets/coco/defaults_cap.yaml",
+        "aokvqa": "configs/datasets/aokvqa/caption.yaml"
     }
 
 

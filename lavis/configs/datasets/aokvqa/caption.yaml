@@ -15,12 +15,12 @@ datasets:
           url:
               - https://storage.googleapis.com/sfr-vision-language-research/LAVIS/datasets/aokvqa/aokvqa_v1p0_train.json
           storage:
-              - coco/annotations/vqa_train_judge_1000.json
+              - aokvqa/annotations/vqa_train_judge_1000.json
         val:
           url:
               - https://storage.googleapis.com/sfr-vision-language-research/LAVIS/datasets/aokvqa/aokvqa_v1p0_val.json
           storage:
-              - coco/annotations/vqa_val_judge_1000.json
+              - aokvqa/annotations/vqa_val_judge_1000.json
         test:
           url:
               - https://storage.googleapis.com/sfr-vision-language-research/LAVIS/datasets/aokvqa/aokvqa_v1p0_val.json
