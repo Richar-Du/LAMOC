@@ -3,7 +3,7 @@ import json
 import tqdm
 import time
 # API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-xxl"
-# headers = {"Authorization": "Bearer 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"}
+# headers = 
 
 # def query(payload):
 # 	response = requests.post(API_URL, headers=headers, json=payload)
